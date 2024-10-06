@@ -53,9 +53,10 @@ jobs:
       # Add the permission step for the lint job too
       - name: Set execute permissions for bin/rails
         run: chmod +x bin/rails
-      
+
       - name: Set execute permissions for all bin files
         run: chmod +x bin/*
+
         
       # Install Ruby and gems
       - name: Install Ruby and gems
