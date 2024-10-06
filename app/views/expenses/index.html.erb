@@ -1,0 +1,29 @@
+<h1>Expense Claims</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Approved</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @expenses.each do |expense| %>
+      <tr>
+        <td><%= expense.name %></td>
+        <td><%= expense.date %></td>
+        <td><%= expense.description %></td>
+        <td><%= expense.amount %></td>
+        <td><%= expense.approved %></td>
+        <td>
+          <%= link_to 'Edit', edit_expense_path(expense) %> |
+          <%= link_to 'Delete', expense, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Expense', new_expense_path %>

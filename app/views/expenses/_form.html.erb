@@ -1,0 +1,30 @@
+<%= form_with model: expense do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :date %>
+    <%= form.date_select :date %>
+  </div>
+
+  <div>
+    <%= form.label :description %>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :amount %>
+    <%= form.number_field :amount, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :approved %>
+    <%= form.check_box :approved %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
