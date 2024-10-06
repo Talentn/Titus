@@ -7,8 +7,10 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    
     env:
       RAILS_ENV: test
+      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -26,7 +28,7 @@ jobs:
         with:
           bundler-cache: true
 
-      # Set up database schema (SQLite doesn't need a separate service)
+      # Set up database schema
       - name: Set up database schema
         run: bin/rails db:schema:load
 
@@ -47,6 +49,7 @@ jobs:
       - name: Set execute permissions for all bin files
         run: chmod +x bin/*
 
+        
       # Install Ruby and gems
       - name: Install Ruby and gems
         uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
@@ -61,6 +64,7 @@ jobs:
         run: bin/bundler-audit --update
 
       # Security audit application code
+      - name: Security audit application code
         run: bin/brakeman -q -w2
 
       # Lint Ruby files
