@@ -5,6 +5,11 @@ class ExpensesController < ApplicationController
       @expenses = Expense.all
     end
   
+    def stats
+      @monthly_stats = Expense.monthly_stats || []
+    end
+    
+
     def show
     end
   
@@ -46,5 +51,6 @@ class ExpensesController < ApplicationController
     def expense_params
       params.require(:expense).permit(:name, :date, :description, :amount, :approved)
     end
+
   end
   

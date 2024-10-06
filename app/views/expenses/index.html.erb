@@ -1,5 +1,6 @@
-<h1>Expense Claims</h1>
-<table>
+<h1 class="my-4">Expense Claims</h1>
+
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Name</th>
@@ -17,13 +18,14 @@
         <td><%= expense.date %></td>
         <td><%= expense.description %></td>
         <td><%= expense.amount %></td>
-        <td><%= expense.approved %></td>
+        <td><%= expense.approved ? 'Yes' : 'No' %></td>
         <td>
-          <%= link_to 'Edit', edit_expense_path(expense) %> |
-          <%= link_to 'Delete', expense, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Edit', edit_expense_path(expense), class: "btn btn-sm btn-primary" %> |
+          <%= link_to 'Delete', expense, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-danger" %>
         </td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'New Expense', new_expense_path %>
+
+<%= link_to 'New Expense', new_expense_path, class: "btn btn-primary" %>
