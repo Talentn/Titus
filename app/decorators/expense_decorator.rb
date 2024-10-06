@@ -1,0 +1,22 @@
+class ExpenseDecorator
+    def initialize(expense)
+      @expense = expense
+    end
+  
+    def formatted_amount
+      ActionController::Base.helpers.number_to_currency(@expense.amount, unit: "€", format: "%n %u")
+    end
+  
+    def formatted_date
+      @expense.date.strftime("%B %d, %Y")
+    end
+  
+    def approved_status
+      @expense.approved ? "Approved" : "Pending"
+    end
+  
+    def display_name
+      @expense.name.titleize
+    end
+  end
+  

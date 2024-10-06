@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.1.6"
+ruby "3.3.5"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.1"
@@ -27,6 +27,10 @@ gem "stimulus-rails"
 gem "jbuilder"
 
 gem 'groupdate'
+
+gem 'bootstrap', '~> 5.0'
+
+gem 'sassc-rails', '>= 2.1.0'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
