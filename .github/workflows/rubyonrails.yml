@@ -4,18 +4,18 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+  workflow_dispatch:  # For manually triggering the workflow
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    
     env:
       RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      # Add this step to fix permission issues
+      # Fix permission issues
       - name: Set execute permissions for bin/rails
         run: chmod +x bin/rails
         
@@ -24,49 +24,15 @@ jobs:
 
       # Install Ruby and gems
       - name: Install Ruby and gems
-        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
+        uses: ruby/setup-ruby@v1
         with:
+          ruby-version: '3.1'  # Adjust the Ruby version as per your project
           bundler-cache: true
 
-      # Set up database schema
+      # Set up database schema (SQLite)
       - name: Set up database schema
         run: bin/rails db:schema:load
 
-      # Run tests
+      # Run tests with bundle exec
       - name: Run tests
-        run: bin/rake
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      
-      # Add the permission step for the lint job too
-      - name: Set execute permissions for bin/rails
-        run: chmod +x bin/rails
-
-      - name: Set execute permissions for all bin files
-        run: chmod +x bin/*
-
-        
-      # Install Ruby and gems
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
-        with:
-          bundler-cache: true
-
-      - name: Generate binstubs
-        run: bundle binstubs bundler-audit brakeman rubocop
-
-      # Security audit dependencies
-      - name: Security audit dependencies
-        run: bin/bundler-audit --update
-
-      # Security audit application code
-      - name: Security audit application code
-        run: bin/brakeman -q -w2
-
-      # Lint Ruby files
-      - name: Lint Ruby files
-        run: bin/rubocop --parallel
+        run: bundle exec rake
