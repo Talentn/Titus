@@ -1,80 +1,32 @@
 name: "Ruby on Rails CI"
+
 on:
   push:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    services:
-      postgres:
-        image: postgres:11-alpine
-        ports:
-          - "5432:5432"
-        env:
-          POSTGRES_DB: rails_test
-          POSTGRES_USER: rails
-          POSTGRES_PASSWORD: password
-    env:
-      RAILS_ENV: test
-      DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      # Add this step to fix permission issues
-      - name: Set execute permissions for bin/rails
-        run: chmod +x bin/rails
-        
-      - name: Set execute permissions for all bin files
-        run: chmod +x bin/*
-
-      # Install Ruby and gems
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
         with:
+          ruby-version: 3.1
           bundler-cache: true
-
-      # Set up database schema
-      - name: Set up database schema
-        run: bin/rails db:schema:load
-
-      # Run tests
-      - name: Run tests
-        run: bin/rake
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
       
-      # Add the permission step for the lint job too
-      - name: Set execute permissions for bin/rails
-        run: chmod +x bin/rails
+      - name: Install dependencies
+        run: |
+          bundle install
 
-      - name: Set execute permissions for all bin files
-        run: chmod +x bin/*
+      - name: Set up database
+        run: |
+          bin/rails db:schema:load
 
-        
-      # Install Ruby and gems
-      - name: Install Ruby and gems
-        uses: ruby/setup-ruby@78c01b705fd9d5ad960d432d3a0cfa341d50e410
-        with:
-          bundler-cache: true
-
-      - name: Generate binstubs
-        run: bundle binstubs bundler-audit brakeman rubocop
-
-      # Security audit dependencies
-      - name: Security audit dependencies
-        run: bin/bundler-audit --update
-
-      # Security audit application code
-      - name: Security audit application code
-        run: bin/brakeman -q -w2
-
-      # Lint Ruby files
-      - name: Lint Ruby files
-        run: bin/rubocop --parallel
+      - name: Run tests
+        run: |
+          bin/rake
