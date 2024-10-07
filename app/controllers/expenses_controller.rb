@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class ExpensesController < ApplicationController
-  before_action :set_expense, only: [:show, :edit, :update, :destroy]
+  before_action :set_expense, only: %i[show edit update destroy]
 
   def index
     @expenses = Expense.all
@@ -9,8 +11,7 @@ class ExpensesController < ApplicationController
     @expenses = Expense.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @expense = Expense.new
@@ -29,8 +30,7 @@ class ExpensesController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @expense.update(expense_params)
@@ -42,14 +42,13 @@ class ExpensesController < ApplicationController
 
   def stats
     sort_order = params[:sort] || 'desc'
-    @monthly_stats = Expense.group_by_month(:date, format: "%B %Y").sum(:amount)
+    @monthly_stats = Expense.group_by_month(:date, format: '%B %Y').sum(:amount)
     @monthly_stats = if sort_order == 'asc'
-      @monthly_stats.sort_by { |_month, total_amount| total_amount }
-    else
-      @monthly_stats.sort_by { |_month, total_amount| -total_amount }
-    end
-end
-
+                       @monthly_stats.sort_by { |_month, total_amount| total_amount }
+                     else
+                       @monthly_stats.sort_by { |_month, total_amount| -total_amount }
+                     end
+  end
 
   def destroy
     @expense.destroy

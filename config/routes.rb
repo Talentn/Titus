@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
   # Health status check
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Define route for stats before the resources block
   get 'expenses/stats', to: 'expenses#stats', as: :expense_stats
@@ -16,5 +18,5 @@ Rails.application.routes.draw do
   resources :expenses
 
   # Set root path to the list of expenses
-  root "expenses#index"
+  root 'expenses#index'
 end
