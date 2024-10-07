@@ -1,8 +1,10 @@
 # frozen_string_literal: true
 
 class ExpensesController < ApplicationController
-  before_action :set_expense, only: %i[show edit update destroy]
+  before_action :set_expense, only: [:show, :edit, :update, :destroy]
+  before_action :set_claimer_list, only: [:new, :edit]
 
+    
   def index
     @expenses = Expense.all
   end
@@ -11,6 +13,10 @@ class ExpensesController < ApplicationController
 
   def new
     @expense = Expense.new
+  end
+
+  def set_claimer_list
+    @claimer_list = ['Ala', 'Gaetan', 'Rahma', 'Taoufik']
   end
 
   def create
@@ -26,7 +32,9 @@ class ExpensesController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @expense = Expense.find(params[:id])
+  end
 
   def update
     if @expense.update(expense_params)
@@ -58,6 +66,6 @@ class ExpensesController < ApplicationController
   end
 
   def expense_params
-    params.require(:expense).permit(:name, :date, :description, :amount, :approved)
-  end
+    params.require(:expense).permit(:claimer, :name, :date, :description, :amount, :approved)
+  end  
 end

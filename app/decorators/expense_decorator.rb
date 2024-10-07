@@ -20,4 +20,8 @@ class ExpenseDecorator
   def display_name
     @expense.name.titleize
   end
+
+  def display_claimer
+    @expense.claimer.present? ? @expense.claimer.titleize : "Unknown Claimer"
+  end
 end

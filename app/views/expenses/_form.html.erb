@@ -1,5 +1,10 @@
 <%= form_with model: expense, local: true, class: "row g-3" do |form| %>
   <div class="col-md-6">
+    <%= form.label :claimer, "Claimer", class: "form-label" %>
+    <%= form.select :claimer, options_for_select(@claimer_list), class: "form-select" %>
+  </div>
+
+  <div class="col-md-6">
     <%= form.label :name, class: "form-label" %>
     <%= form.text_field :name, class: "form-control", placeholder: "Enter expense name" %>
   </div>
