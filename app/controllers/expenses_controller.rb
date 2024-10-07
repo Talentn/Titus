@@ -7,10 +7,6 @@ class ExpensesController < ApplicationController
     @expenses = Expense.all
   end
 
-  def index
-    @expenses = Expense.all
-  end
-
   def show; end
 
   def new
