@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.1.6"
+ruby "3.3.5"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.1"
@@ -52,6 +52,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
+  gem 'rubocop', require: false
   gem 'brakeman', require: false
   gem 'bundler-audit', require: false
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
