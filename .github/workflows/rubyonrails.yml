@@ -45,6 +45,8 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
+      - name: Set execute permissions for bin files
+        run: chmod +x bin/*
       - name: Checkout code
         uses: actions/checkout@v4
       - name: Install Ruby and gems
