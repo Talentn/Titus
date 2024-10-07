@@ -1,24 +1,58 @@
-# README
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Talentn_Titus&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=Talentn_Titus)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Titus
+Titus is a Ruby on Rails application that allows users to manage and track expenses.
 
-Things you may want to cover:
+## Prerequisites
 
-* Ruby version
+Before running the project, ensure you have the following installed:
 
-* System dependencies
+- **Ruby 3.1.6**
+- **Rails 7.1.1**
 
-* Configuration
+## Setup Instructions
 
-* Database creation
+1. **Clone the repository**
 
-* Database initialization
+    Open a terminal and run:
+    
+    ```bash
+    git clone https://github.com/your-username/titus.git
+    cd titus
 
-* How to run the test suite
+2. **Install the required gems**
+   Run the following command to install the necessary dependencies:
+    ```bash
+    bundle install
 
-* Services (job queues, cache servers, search engines, etc.)
+3. **Set up the database**
+   ```bash
+   rails db:create
+   rails db:migrate
 
-* Deployment instructions
+4. **Run the tests**
+    ```bash
+   rails test
 
-* ...
+5. **Start the Rails server**
+   ```bash
+   rails start
+
+## Optional Tools
+
+- **Brakeman**: For security auditing.
+- **Rubocop**: For linting Ruby files.
+
+You can run these tools with the following commands:
+
+- To run security audits with Brakeman:
+
+  ```bash
+  brakeman
+
+  To run linting with Rubocop:
+    ```bash
+  bin/rubocop
+
+
+That's it 
