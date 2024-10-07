@@ -54,6 +54,11 @@ jobs:
       - name: Generate binstubs
         run: bundle binstubs bundler-audit brakeman rubocop
       # Add or replace any other lints here
+      - name: Set execute permissions for bin files
+        run: |
+          if [ -d "bin" ]; then
+            chmod +x bin/*
+          fi
       - name: Security audit dependencies
         run: bin/bundler-audit --update
       - name: Security audit application code
