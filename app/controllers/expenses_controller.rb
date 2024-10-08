@@ -47,6 +47,7 @@ class ExpensesController < ApplicationController
   def stats
     sort_order = params[:sort] || 'desc'
     @monthly_stats = Expense.group_by_month(:date, format: '%B %Y').sum(:amount)
+    @monthly_stats = @monthly_stats.reject { |_month, total_amount| total_amount.zero? }
     @monthly_stats = if sort_order == 'asc'
                        @monthly_stats.sort_by { |_month, total_amount| total_amount }
                      else
