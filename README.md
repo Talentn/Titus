@@ -17,7 +17,7 @@ Before running the project, ensure you have the following installed:
     Open a terminal and run:
     
     ```bash
-    git clone https://github.com/your-username/titus.git
+    git clone https://github.com/talentn/titus.git
     cd titus
 
 2. **Install the required gems**
