@@ -2,7 +2,7 @@
 
 class ExpensesController < ApplicationController
   before_action :set_expense, only: [:show, :edit, :update, :destroy]
-  before_action :set_claimer_list, only: [:new, :edit]
+  before_action :set_claimer_list, only: [:new, :edit, :create, :update]
 
     
   def index
@@ -25,7 +25,6 @@ class ExpensesController < ApplicationController
     if @expense.save
       redirect_to expenses_path, notice: 'Expense was successfully created.'
     else
-      set_claimer_list
       render :new
     end
   end
@@ -39,7 +38,6 @@ class ExpensesController < ApplicationController
     if @expense.update(expense_params)
       redirect_to expenses_path, notice: 'Expense was successfully updated'
     else
-      set_claimer_list
       render :edit
     end
   end

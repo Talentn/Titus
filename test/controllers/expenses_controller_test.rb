@@ -30,7 +30,7 @@ class ExpensesControllerTest < ActionDispatch::IntegrationTest
   test 'should create expense' do
     assert_difference('Expense.count', 1) do
       post expenses_url,
-           params: { expense: { name: 'New Expense', date: Date.today, description: 'Some description', amount: 100,
+           params: { expense: { claimer: 'Ala', date: Date.today, description: 'Some description', amount: 100,
                                 approved: true } }
     end
     assert_redirected_to expenses_url
@@ -44,7 +44,7 @@ class ExpensesControllerTest < ActionDispatch::IntegrationTest
 
   # Test for Update action (Valid case)
   test 'should update expense' do
-    patch expense_url(@expense), params: { expense: { name: 'Updated Expense', amount: 200 } }
+    patch expense_url(@expense), params: { expense: { claimer: 'Taoufik', amount: 200 } }
     assert_redirected_to expenses_url
   end
 
