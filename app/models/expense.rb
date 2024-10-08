@@ -6,4 +6,9 @@ class Expense < ApplicationRecord
       .group("strftime('%Y-%m', date)")
       .order('month DESC')
   end
+  validates :claimer, presence: true
+  validates :date, presence: true
+  validates :description, presence: true
+  validates :amount, presence: true, numericality: { greater_than: 0 }
+  validates :approved, inclusion: { in: [true, false] }
 end

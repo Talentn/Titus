@@ -1,4 +1,15 @@
-<%= form_with model: expense, local: true, class: "row g-3" do |form| %>
+<%= form_with model: @expense, local: true, class: "row g-3" do |form| %>
+  <% if @expense.errors.any? %>
+    <div class="alert alert-danger">
+      <h4><%= pluralize(@expense.errors.count, "error") %> prohibited this expense from being saved:</h4>
+      <ul>
+        <% @expense.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="col-md-6">
     <%= form.label :claimer, "Claimer", class: "form-label" %>
     <%= form.select :claimer, options_for_select(@claimer_list), class: "form-select" %>

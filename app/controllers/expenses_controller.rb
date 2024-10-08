@@ -20,17 +20,16 @@ class ExpensesController < ApplicationController
   end
 
   def create
-    service = CreateExpenseService.new(expense_params)
-    result = service.call
+    @expense = Expense.new(expense_params)
 
-    if result.success?
+    if @expense.save
       redirect_to expenses_path, notice: 'Expense was successfully created.'
     else
-      @expense = result.expense
-      flash.now[:alert] = result.errors.full_messages.to_sentence
+      set_claimer_list
       render :new
     end
   end
+
 
   def edit
     @expense = Expense.find(params[:id])
@@ -40,6 +39,7 @@ class ExpensesController < ApplicationController
     if @expense.update(expense_params)
       redirect_to expenses_path, notice: 'Expense was successfully updated'
     else
+      set_claimer_list
       render :edit
     end
   end
