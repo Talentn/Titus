@@ -8,7 +8,7 @@ Titus is a Ruby on Rails application that allows users to manage and track expen
 Before running the project, ensure you have the following installed:
 
 - **Ruby 3.1.6**
-- **Rails 7.1.1**
+- **Rails 7.2.1**
 
 ## Setup Instructions
 
@@ -17,7 +17,7 @@ Before running the project, ensure you have the following installed:
     Open a terminal and run:
     
     ```bash
-    git clone https://github.com/your-username/titus.git
+    git clone https://github.com/talentn/titus.git
     cd titus
 
 2. **Install the required gems**
