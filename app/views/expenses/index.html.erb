@@ -10,7 +10,6 @@
     <thead class="table-dark">
       <tr>
         <th>Claimer</th>
-        <th>Name</th>
         <th>Date</th>
         <th>Description</th>
         <th>Amount</th>
@@ -23,7 +22,6 @@
         <% decorator = ExpenseDecorator.new(expense) %>
         <tr>
           <td><%= decorator.display_claimer %></td>
-          <td><%= decorator.display_name %></td>
           <td><%= decorator.formatted_date %></td>
           <td><%= expense.description %></td>
           <td><%= decorator.formatted_amount %></td>
