@@ -32,6 +32,7 @@ Before running the project, ensure you have the following installed:
 
 4. **Run the tests**
     ```bash
+   rails db:migrate RAILS_ENV=test
    rails test
 
 5. **Start the Rails server**
